@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz</title>
+    <script src="https://kit.fontawesome.com/7a90690735.js" crossorigin="anonymous"></script>
+    <style>
+        *{
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            display: flex;
+        }
+        .quiz{
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            width: 60%;
+        }
+        .heading{
+            margin-top: 20px;
+        }
+        .sub-heading1{
+            font-size: x-large;
+        }
+        .sub-heading1::after{
+            content: '';
+            margin-top: 1px;
+            display: block;
+            background-color: rgb(85, 180, 85);
+            height: 2px;
+        }
+        .sub-heading2{
+            color: rgb(126, 124, 124);
+            font-size: 11px;
+            text-align:right;
+        }
+
+        .button, .numbers{
+            font-size: 18px;
+            margin: 2px;
+            margin-left: 0;
+            padding: 10px 20px;
+            border-radius: 7px;
+            outline: none;
+            border: none;
+            background-color: rgb(85, 180, 85);
+            color: aliceblue;
+        }
+        #btn{
+            margin: 10px;
+            padding: 10px 30px ;
+            width: 200px;
+
+        }
+        .main-heading{
+            display: flex;
+            flex-direction: column;
+        }
+        .sub-container{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .sub-heading3{
+            display: flex;
+            padding: 10px;
+            justify-content: center;
+        }
+        .subh-col{
+            padding: 12px;
+            background-color: rgb(126, 124, 124);
+            border-radius: 50%;
+            text-align: center;
+        }
+        .subh-subcol{
+            background-color: aliceblue;
+            border-radius: 50%;
+            padding: 8px;
+        }
+        .sub-heading4{
+            font-size: 25px;
+        }
+        .sub-heading5{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            font-size: 12px;
+        }
+        .sub-heading5 .subh-col1{
+            
+        }
+        .sub-heading5 .subh-col2{
+            position: absolute;
+            right: 20%;
+        }
+        .questions{
+            margin-top: 3px;
+            margin-bottom: 3px;
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 11px;
+            color: aliceblue;
+            background-color: rgb(126, 124, 124);            
+        }
+        .string{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+        .nums{
+            display: flex;
+            flex-direction: row;
+        }
+        .numbers{
+            width: 120px;
+            padding: 3px 10px;
+            font-size: 16px;
+            margin: 6px;
+            cursor: pointer;
+        }
+        #back{
+            padding: 10px;
+            width:150px;
+            font-size: 15px;
+            background-color: rgb(236, 35, 35)
+        }
+        .input{
+            margin: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="quiz">
+            <div class="main">
+                <div class="heading"> 
+                    <p class="sub-heading1" >Sequence Alphabets</p>
+                    <p class="sub-heading2">100% correct</p> 
+                </div>
+                <div class="btn">
+                    <button class="button" id="back">BACK</button>
+                </div>
+            </div>
+            <div class="main-heading">
+                <div class="sub-container">
+                    <div class="sub-heading3">
+                        <div class="subh-col">
+                            <p class="subh-subcol">0/1</p>
+                        </div>
+                    </div>
+                    <div class="sub-heading4">
+                        <p>Sequence Alphabets</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="sub-heading5">
+                        <p class="subh-col1">Module: Sequence Alphabets</p>
+                        <p class="subh-col2"><i class="fafa fa-sharp fa-solid fa-stopwatch" style="color: #26a269;">10:00</i></p>
+                    </div>
+                    <div class="questions">
+                     <p>0/30</p>
+                    </div>
+                    <div class="string">
+                        <p>Find the next Alphabets of following Sequence:</p>
+                        <p id="gameScore">Alphabets are shown here:</p><p id="copyWord"></p>
+                        <div class="nums">  
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <button class="numbers" id="num1" onclick="getInput1()"> A</button>
+                    </div>
+                    <div>
+                        <button class="numbers" id="num2" onclick="getInput2()">B</button>
+                    </div>
+                    <div>
+                        <button class="numbers" id="num3" onclick="getInput3()">C</button>
+                    </div>
+                </div>
+                <div>
+                    <button id="btn" onclick="gameStart()" class="button">Start</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var aplphabet=[
+            document.querySelector("#num1"),
+            document.querySelector("#num2"),
+            document.querySelector("#num3")
+        ]
+        var i=0
+        var time=1000*60*10
+        var gameStatus = true
+        const showTime = document.querySelector('.fafa')
+        var score
+        var btn = document.querySelector("#btn")
+        var gScore = document.querySelector("#gameScore")
+        var gScore2= document.querySelector("#copyWord")
+        var rGen = Math.floor(Math.random()*2)
+        var word1="" ,word2="",  wordcopy=""
+         alphaBets=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+        var timing=1 , RandomNum
+        function gameScore(){
+            
+        }
+
+        function gameStart(){
+            gameStatus = true
+            if(timing==1){
+                setInterval(timer,1000)
+                timing=0
+            }
+            btn.textContent="Stop"
+            btn.style.background = "rgb(236, 35, 35)"
+            btn.setAttribute("onclick","gameEnd()")
+            gameRun()
+            score=0
+            time=1000*60*10
+        }
+
+        function gameRun(){
+            word1=""
+            word2=""
+          
+            wordcopy=""
+            aplphabet[0].innerHTML =''
+            aplphabet[1].innerHTML =''
+            aplphabet[2].innerHTML =''
+            sequence()
+            aplphabet[0].innerHTML = alphaBets[Math.floor(Math.random()*26)]+alphaBets[Math.floor(Math.random()*26)]
+            aplphabet[1].innerHTML = alphaBets[Math.floor(Math.random()*26)]+alphaBets[Math.floor(Math.random()*26)]
+            aplphabet[2].innerHTML = alphaBets[Math.floor(Math.random()*26)]+alphaBets[Math.floor(Math.random()*26)]
+            gScore.textContent=word1
+            gScore2.textContent= wordcopy
+            RandomNum=Math.floor(Math.random()*3)
+            aplphabet[RandomNum].textContent=word2
+            console.log(word1)
+            console.log(word2)
+            console.log("copy", wordcopy)
+        }
+        function getInput1(){
+            if(RandomNum==0){
+                score++
+                console.log(score)
+            }
+            gameRun()
+        }
+        function getInput2(){
+            if(RandomNum==1){
+                score++
+                console.log(score)
+            }
+            gameRun()
+        }
+        function getInput3(){
+            if(RandomNum==2){
+                score++
+                console.log(score)
+            }
+            gameRun()
+        }
+
+        function reset(){
+
+        }
+        function timer(){
+            if(time>=0 & gameStatus!= false){            
+                var minutes = Math.floor(time / 60000);
+                var seconds = ((time % 60000) / 1000).toFixed(0);
+                time=time-1000
+                showTime.textContent= seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+            }
+            else{
+                console.log("setTimeout")
+                gameStatus=false
+            }            
+        }
+        function gameEnd(){
+            gameStatus=false
+            btn.textContent="Start "
+            btn.style.background = "rgb(85, 180, 85)"
+            btn.setAttribute("onclick","gameStart()")
+            gScore.textContent = "Your Score is "+score
+        }
+        function sequence(){gScore
+            num1=Math.floor(Math.random()*20)
+            
+            for(let i=0;i<=5;i++){
+                    word1+=alphaBets[num1]
+                    num1=num1+1
+                    
+                }
+                wordcopy= word1
+               
+            for(let i=4;i<=5;i++){
+                word2+=alphaBets[num1]
+                num1=num1+1
+
+            }
+        }
+            console.log(word1)
+            console.log(word2)
+            console.log("copy", wordcopy)
+        
+    </script>
+</body>
+</html>

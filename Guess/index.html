@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quiz</title>
+    <script
+      src="https://kit.fontawesome.com/7a90690735.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        display: flex;
+      }
+      .quiz {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        width: 60%;
+      }
+      .heading {
+        margin-top: 20px;
+      }
+      .sub-heading1 {
+        font-size: x-large;
+      }
+      .sub-heading1::after {
+        content: "";
+        margin-top: 1px;
+        display: block;
+        background-color: rgb(85, 180, 85);
+        height: 2px;
+      }
+      .sub-heading2 {
+        color: rgb(126, 124, 124);
+        font-size: 11px;
+        text-align: right;
+      }
+
+      .button {
+        padding: 8px;
+        font-size: 10px;
+        margin: 2px;
+        margin-left: 0;
+        border-radius: 7px;
+        background-color: rgb(85, 180, 85);
+        color: aliceblue;
+      }
+      .main-heading {
+        display: flex;
+        flex-direction: column;
+      }
+      .sub-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+      .sub-heading3 {
+        display: flex;
+        padding: 10px;
+        justify-content: center;
+      }
+      .subh-col {
+        padding: 12px;
+        background-color: rgb(126, 124, 124);
+        border-radius: 50%;
+        text-align: center;
+      }
+      .subh-subcol {
+        background-color: aliceblue;
+        border-radius: 50%;
+        padding: 8px;
+      }
+      .sub-heading4 {
+        font-size: 25px;
+      }
+      .sub-heading5 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        font-size: 12px;
+      }
+      .sub-heading5 .subh-col1 {
+      }
+      .sub-heading5 .subh-col2 {
+        position: absolute;
+        right: 20%;
+      }
+      .questions {
+        margin-top: 3px;
+        margin-bottom: 3px;
+        border-radius: 4px;
+        padding: 3px;
+        font-size: 11px;
+        color: aliceblue;
+        background-color: rgb(126, 124, 124);
+      }
+      .string {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      #back {
+        background-color: rgb(236, 35, 35);
+      }
+      .numbers {
+        background-color: aliceblue;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 300px;
+        margin: 50px 0px;
+      }
+      .num {
+        width: 50px;
+        padding: 10px;
+        background-color: #26a269;
+        text-align: center;
+      }
+      #solution_box {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+      }
+      .ansbox {
+        padding: 10px;
+        width: 300px;
+        display: flex;
+      }
+      label {
+        font-size: 25px;
+      }
+      input {
+        margin-left: 20px;
+        padding: 10px 20px;
+      }
+      button {
+        background-color: #26a269;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="quiz">
+        <div class="main">
+          <div class="heading">
+            <p class="sub-heading1">Sort Numbers</p>
+            <p class="sub-heading2">100% correct</p>
+            <h3 id="score"></h3>
+          </div>
+          <div class="btn">
+            <button class="button" id="back">BACK</button>
+          </div>
+        </div>
+        <div class="main-heading">
+          <div class="sub-container">
+            <div class="sub-heading3">
+              <div class="subh-col">
+                <p class="subh-subcol">0/1</p>
+              </div>
+            </div>
+            <div class="sub-heading4">
+              <p>Sorting Test</p>
+            </div>
+          </div>
+          <div>
+            <div class="sub-heading5">
+              <p class="subh-col1">Module: Sort numbers</p>
+              <p class="subh-col2">
+                <i
+                  class="fafa fa-sharp fa-solid fa-stopwatch"
+                  style="color: #26a269"
+                  >10:00</i
+                >
+              </p>
+            </div>
+            <div class="questions">
+              <p>0/30</p>
+            </div>
+            <div class="string">
+              <p>Sort Numbers in <strong>Accending</strong> order:</p>
+              <p id="stRing">Numbers are shown here</p>
+            </div>
+          </div>
+          <div class="numbers">
+            <div class="num1 num" id="que1" onclick="sendAnswer1()">0</div>
+            <div class="num2 num" id="que2" onclick="sendAnswer2()">0</div>
+            <div class="num3 num" id="que3" onclick="sendAnswer3()">0</div>
+          </div>
+        </div>
+        <div id="solution_box">
+          <div class="ansbox">
+            <label for="1">1:</label>
+            <input type="text" id="ans1" readonly="readonly" />
+          </div>
+          <div class="ansbox">
+            <label for="2">2:</label>
+            <input type="text" id="ans2" readonly="readonly" />
+          </div>
+          <div class="ansbox">
+            <label for="3">3:</label>
+            <input type="text" id="ans3" readonly="readonly" />
+          </div>
+        </div>
+        <div>
+          <button onclick="submit()" class="button" id="submit">Submit</button>
+          <button id="btn" onclick="gameStart()" class="button">Start</button>
+          <button id="clrbtn" onclick="clearBtn()" class="button">Clear</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      var gameStatus = false;
+      var turn = 1;
+      var score = 0;
+      var numberArray = [];
+      var i = 0;
+      var num1;
+      var num3;
+      var num2;
+      var time1 = 5000;
+      var time2 = 60000, j=1
+
+      function randomNumber() {
+        num1 = (Math.random() * 10).toFixed(2);
+        num2 = (Math.random() * 10).toFixed(2);
+        num3 = (Math.random() * 10).toFixed(2);
+        num11 = document.getElementById("que1");
+        num11.innerHTML = num1;
+        num22 = document.getElementById("que2");
+        num22.innerHTML = num2;
+        num33 = document.getElementById("que3");
+        num33.innerHTML = num3;
+
+      }
+
+
+      function gameStart() {
+        setTimeout(StopGame, time2);
+        gameStatus = true;
+        gameRun();
+      }
+
+      function gameRun() {
+
+        if(gameStatus== true && turn == 1){
+            randomNumber();
+            if(j==1){
+                setInterval(Timeout, 1000);
+                j=0
+            }
+            else({
+            
+            })
+        
+        
+        }
+        
+      }
+
+      function sendAnswer1() {
+        console.log("clicked 1");
+        an1 = document.getElementById("ans" + turn).value = num1;
+        que1.setAttribute("onClick", "no()");
+        document.getElementById("que1").style.backgroundColor = "red";
+        turn++;
+        i++;
+      }
+
+      function sendAnswer2() {
+        console.log("clicked 2");
+        an2 = document.getElementById("ans" + turn).value = num2;
+        que2.setAttribute("onClick", "no()");
+        document.getElementById("que2").style.backgroundColor = "red";
+        turn++;
+        i++;
+      }
+
+      function sendAnswer3() {
+        console.log("clicked 3");
+        an3 = document.getElementById("ans" + turn).value = num3;
+        que3.setAttribute("onClick", "no()");
+        document.getElementById("que3").style.backgroundColor = "red";
+        turn++;
+        i++;
+      }
+
+      function clearBtn() {
+        document.getElementById("ans1").value = " ";
+        document.getElementById("ans2").value = " ";
+        document.getElementById("ans3").value = " ";
+        que1.style.backgroundColor = "green";
+        que2.style.backgroundColor = "green";
+        que3.style.backgroundColor = "green";
+        document
+          .getElementById("que1")
+          .setAttribute("onClick", "sendAnswer1()");
+        document
+          .getElementById("que2")
+          .setAttribute("onClick", "sendAnswer2()");
+        document
+          .getElementById("que3")
+          .setAttribute("onClick", "sendAnswer3()");
+        turn = 1;
+      }
+
+      function Timeout() {
+        if(time1==0){
+        clearBtn();
+        time1=5000
+        gameRun();
+        
+        }
+        else{
+            time1-=1000
+            console.log("hhhhhhhhhhh")
+        }
+       
+      }
+
+      function StopGame() {
+        gameStatus = false;
+      }
+
+      function submit() {
+        var numberArray = [num1, num2, num3];
+        console.log("unsorted array user ",numberArray);
+        var sortedArray = numberArray.sort();
+        an1=document.getElementById("ans1").value
+        console.log("valueis ", an1)
+        an2=document.getElementById("ans2").value
+        console.log("valueis ", an2)
+        an3=document.getElementById("ans3").value
+        console.log("valueis ", an3)
+        userArray = [an1, an2, an3];
+        console.log("user answer is  ", userArray);
+        console.log("comp ans is ", sortedArray);
+        console.log(JSON.stringify(sortedArray))
+
+        if (JSON.stringify(userArray) === JSON.stringify(sortedArray)) {
+          score++;
+          console.log("your Score is ", score);
+          console.log("right answer");
+          document.getElementById("score").innerHTML = score;
+        } else {
+          console.log("wrong input");
+        }
+        turn = 1;
+        gameRun();
+        numberArray = [];
+        userArray = [];
+        clearBtn();
+    
+        
+      }
+
+      function no() {
+        console.log("nooooo");
+      }
+    </script>
+  </body>
+</html>
